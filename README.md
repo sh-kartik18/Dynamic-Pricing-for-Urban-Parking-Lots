@@ -22,7 +22,10 @@ The project uses a **simulated real-time dataset** that mimics the behavior of m
 | Column Name           | Description                                              | Type     |
 |-----------------------|----------------------------------------------------------|----------|
 | `SystemCodeNumber`    | Unique ID for each parking lot                           | string   |
-| `Timestamp`           | Event timestamp (format: `%Y-%m-%d %H:%M:%S`)            | string   |
+| `Latitude`            | Geographic latitude of the parking lot location           | float   |
+| `Longitude`           | Geographic longitude of the parking lot location          | float    |
+| `LastUpdatedDate`     | The date when the occupancy data was last updated        |  string  |
+| `LastUpdatedDate`     | The exact time on the update date when the data was recorded. |  string  |
 | `Occupancy`           | Current number of parked vehicles                        | int      |
 | `Capacity`            | Total capacity of the parking lot                        | int      |
 | `QueueLength`         | Number of vehicles waiting to park                       | int      |
@@ -41,6 +44,7 @@ These are derived during stream ingestion using `Pathway` and UDFs:
 | `VehicleFactor` | Encoded vehicle type: Cycle → 0, Bike → 1, Car → 2, Truck → 3|
 | `day_id`        | Unique ID per lot per day for time windowing           |
 | `instance`      | Time-based grouping for real-time windowing            |
+| `Timestamp`     | Event timestamp (format: `%Y-%m-%d %H:%M:%S`)   
 
 ## 🛠️ Tech Stack
 
