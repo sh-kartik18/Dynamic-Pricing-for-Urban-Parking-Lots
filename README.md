@@ -13,8 +13,8 @@ The project uses a **simulated real-time dataset** that mimics the behavior of m
 
 ### 🔸 Source File
 - **File Name**: `dataset.csv`
-- **Format**: Streamed via `Pathway` as a real-time input
-- **Rows**: 10,000+ (can be expanded)
+- **Format**: CSV (Comma-Separated Values)
+- **Rows**: 18,368
 - **Parking Lots**: 14 unique locations (identified via `SystemCodeNumber`)
 
 ### 🔸 Schema
