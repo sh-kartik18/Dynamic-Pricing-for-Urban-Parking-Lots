@@ -65,19 +65,20 @@ This model calculates a **dynamic base price** for each parking lot in real-time
 A parking lot’s demand volatility is captured using the difference between **maximum** and **minimum occupancy rate** within a day. Higher volatility suggests higher demand, which justifies price adjustments.
 
 ### 📈 Pricing Formula
+<pre> price = base_price + (occ_max - occ_min) / capacity </pre>
 
-price = base_price + (occ_max - occ_min) / capacity
 
 ### 🧱 Architecture Flow
 
-1. **CSV Ingestion**: Streamed using `Pathway`
+1. **Initial Ingestion**: Load CSV data using `Pandas`
 2. **Preprocessing**: Feature engineering including `OccupancyRate` and timestamp parsing
-3. **Windowing**: Daily tumbling window using `windowby()`
-4. **Aggregation**:
+3. **Streaming Pipeline**: Stream preprocessed data via `Pathway`
+4. **Windowing**: Daily tumbling window using `windowby()`
+5. **Aggregation**:
    - Max/Min Occupancy Rate
    - Max Capacity
-5. **Pricing Calculation**: Using the formula above
-6. **Export/Plotting**: Saved to JSONL and visualized using Bokeh
+6. **Pricing Calculation**: Using the formula above
+7. **Export/Plotting**: Saved to JSONL and visualized using Bokeh
 
 ## 📈 Results & Inference
 - **Goal**: Adjust the parking price based on daily variations in occupancy.
@@ -92,7 +93,7 @@ This model adjusts parking prices based on **real-world demand factors** that af
 
 We define a composite demand function:
 
-Demand = α · (Occupancy / Capacity) + β · QueueLength − γ · TrafficLevel + δ · IsSpecialDay + ε · VehicleTypeWeight
+<pre>Demand = α · (Occupancy / Capacity) + β · QueueLength − γ · TrafficLevel + δ · IsSpecialDay + ε · VehicleTypeWeight</pre>
 
 Where:
 
@@ -118,27 +119,32 @@ price = base_price × (1 + λ × NormalizedDemand)
 
 ### 🔄 Architecture Flow
 
-1. **Data Ingestion**: Streaming CSV via `Pathway`
+1. **Inittial Ingestion**: Load CSV data using `Pandas`.
 2. **Preprocessing**:
-   - Convert traffic and vehicle type to numerical levels
-   - Compute `OccupancyRate`
-3. **Windowing**: Daily tumbling windows per lot
-4. **Aggregation**:
+   - Convert traffic and vehicle type to numerical levels.
+   - Compute `OccupancyRate` and timestamp parsing.
+3. **Streaming pipeline**: Stream preprocessed data via `Pathway`.
+4. **Windowing**: Daily tumbling windows per lot
+5. **Aggregation**:
    - Average Occupancy, Queue Length, Traffic, Vehicle Type
    - Special day indicator
-5. **Demand Calculation**: Using the weighted formula
-6. **Price Calculation**: Based on normalized demand
-7. **Export & Plot**:
+6. **Demand Calculation**: Using the weighted formula
+7. **Price Calculation**: Based on normalized demand
+8. **Export & Plot**:
    - JSONL file written using Pathway
    - Visualized using Bokeh (per-lot pricing trends)
 
 ## 📈 Results & Inference
+
 - **Goal**: Determine a more intelligent price based on a combination of factors — occupancy, queue length, traffic condition, vehicle type, and special day status.
 - **Observation**: The plotted prices show more refined variation, often differing from Model 1, as they react to multi-factor demand changes.
 - **Inference**: This model provides nuanced and fair pricing by factoring in local demand stressors. For example, high traffic and long queues during a festival day lead to higher prices.
 
 ---
+### 🏗️ Architecture Diagram
+![Workflow Diagram](architecture_diagram.png)
 
+---
 ### 🚀 Future Improvements
 
 While the project currently implements two core dynamic pricing models — a **Real-Time Baseline Model** and a **Demand-Based Pricing Model** — a potential enhancement includes integrating a **Competitive Pricing Model**. This model would dynamically adjust parking rates based on nearby competitors’ pricing using geographic proximity (latitude and longitude). Additionally, future work could explore deeper integration of real-world traffic APIs, predictive occupancy trends, and user behavior analytics to further optimize pricing strategies and rerouting decisions.
