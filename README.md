@@ -79,6 +79,11 @@ price = base_price + (occ_max - occ_min) / capacity
 5. **Pricing Calculation**: Using the formula above
 6. **Export/Plotting**: Saved to JSONL and visualized using Bokeh
 
+## 📈 Results & Inference
+- **Goal**: Adjust the parking price based on daily variations in occupancy.
+- **Observation**: The plotted price fluctuates across days for each lot, depending on the difference between maximum and minimum occupancy rates.
+- **Inference**: Lots with high variation in occupancy see greater pricing adjustments, reflecting dynamic demand. This model ensures basic responsiveness without overcomplicating the logic.
+
 ## ⚡ Model 2: Demand-Based Dynamic Pricing
 
 This model adjusts parking prices based on **real-world demand factors** that affect parking pressure in urban areas. It provides a more responsive pricing scheme than the baseline.
@@ -126,6 +131,13 @@ price = base_price × (1 + λ × NormalizedDemand)
 7. **Export & Plot**:
    - JSONL file written using Pathway
    - Visualized using Bokeh (per-lot pricing trends)
+
+## 📈 Results & Inference
+- **Goal**: Determine a more intelligent price based on a combination of factors — occupancy, queue length, traffic condition, vehicle type, and special day status.
+- **Observation**: The plotted prices show more refined variation, often differing from Model 1, as they react to multi-factor demand changes.
+- **Inference**: This model provides nuanced and fair pricing by factoring in local demand stressors. For example, high traffic and long queues during a festival day lead to higher prices.
+
+---
 
 ### 🚀 Future Improvements
 
