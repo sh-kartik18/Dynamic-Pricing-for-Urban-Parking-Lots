@@ -93,7 +93,7 @@ This model adjusts parking prices based on **real-world demand factors** that af
 
 We define a composite demand function:
 
-<pre>Demand = α · (Occupancy / Capacity) + β · QueueLength − γ · TrafficLevel + δ · IsSpecialDay + ε · VehicleTypeWeight</pre>
+<pre> Demand = α · (Occupancy / Capacity) + β · QueueLength − γ · TrafficLevel + δ · IsSpecialDay + ε · VehicleTypeWeight </pre>
 
 Where:
 
@@ -135,7 +135,6 @@ price = base_price × (1 + λ × NormalizedDemand)
    - Visualized using Bokeh (per-lot pricing trends)
 
 ## 📈 Results & Inference
-
 - **Goal**: Determine a more intelligent price based on a combination of factors — occupancy, queue length, traffic condition, vehicle type, and special day status.
 - **Observation**: The plotted prices show more refined variation, often differing from Model 1, as they react to multi-factor demand changes.
 - **Inference**: This model provides nuanced and fair pricing by factoring in local demand stressors. For example, high traffic and long queues during a festival day lead to higher prices.
