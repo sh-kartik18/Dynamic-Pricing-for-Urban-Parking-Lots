@@ -126,3 +126,7 @@ price = base_price × (1 + λ × NormalizedDemand)
 7. **Export & Plot**:
    - JSONL file written using Pathway
    - Visualized using Bokeh (per-lot pricing trends)
+
+### 🚀 Future Improvements
+
+While the project currently implements two core dynamic pricing models — a **Real-Time Baseline Model** and a **Demand-Based Pricing Model** — a potential enhancement includes integrating a **Competitive Pricing Model**. This model would dynamically adjust parking rates based on nearby competitors’ pricing using geographic proximity (latitude and longitude). Additionally, future work could explore deeper integration of real-world traffic APIs, predictive occupancy trends, and user behavior analytics to further optimize pricing strategies and rerouting decisions.
