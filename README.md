@@ -12,7 +12,7 @@ This project implements a real-time dynamic parking pricing model that adjusts p
 The project uses a **simulated real-time dataset** that mimics the behavior of multiple city parking lots across different conditions.
 
 ### 🔸 Source File
-- **File Name**: `parking_stream.csv`
+- **File Name**: `dataset.csv`
 - **Format**: Streamed via `Pathway` as a real-time input
 - **Rows**: 10,000+ (can be expanded)
 - **Parking Lots**: 14 unique locations (identified via `SystemCodeNumber`)
