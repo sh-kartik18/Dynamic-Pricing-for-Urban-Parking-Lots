@@ -4,8 +4,7 @@ This project implements a real-time dynamic parking pricing model that adjusts p
 
 - ⏱️ **Real-time processing** using [Pathway](https://github.com/pathwaycom/pathway)
 - 📊 **Interactive price visualizations** using Bokeh + Panel
-- 🧠 **Three intelligent pricing models**: Baseline, Demand-Based, and Competitive
-- 📍 **Location-aware decision making** using lat-long proximity (Model 3)
+- 🧠 **Two intelligent pricing models**: Baseline and Demand-Based
 - 📈 Prices stay fair: always between **0.5x and 2x** of the base price
 
 ## 📂 Dataset Overview
@@ -27,9 +26,9 @@ The project uses a **simulated real-time dataset** that mimics the behavior of m
 | `Occupancy`           | Current number of parked vehicles                        | int      |
 | `Capacity`            | Total capacity of the parking lot                        | int      |
 | `QueueLength`         | Number of vehicles waiting to park                       | int      |
-| `TrafficConditionNearby` | Nearby traffic status: Light, Medium, or Heavy      | string   |
+| `TrafficConditionNearby` | Nearby traffic status: Low, Average or High      | string   |
 | `IsSpecialDay`        | Indicates special events (e.g. holidays, festivals)      | boolean  |
-| `VehicleType`         | Type of vehicle: Bike, Car, SUV                          | string   |
+| `VehicleType`         | Type of vehicle: Bike, Car, Truck , Cycle                 | string   |
 
 ### 🔸 Engineered Features
 
@@ -38,8 +37,8 @@ These are derived during stream ingestion using `Pathway` and UDFs:
 | Feature         | Description                                             |
 |-----------------|---------------------------------------------------------|
 | `OccupancyRate` | Ratio of `Occupancy / Capacity`                        |
-| `TrafficLevel`  | Encoded traffic severity: Light → 0, Medium → 1, Heavy → 2 |
-| `VehicleFactor` | Encoded vehicle type: Bike → 0, Car → 1, SUV → 2       |
+| `TrafficLevel`  | Encoded traffic severity: Low → 0, Average → 1, High → 2 |
+| `VehicleFactor` | Encoded vehicle type: Cycle → 0, Bike → 1, Car → 2, Truck → 3|
 | `day_id`        | Unique ID per lot per day for time windowing           |
 | `instance`      | Time-based grouping for real-time windowing            |
 
@@ -83,6 +82,7 @@ This model adjusts parking prices based on **real-world demand factors** that af
 ### 🔍 Demand Formula
 
 We define a composite demand function:
+
 Demand = α · (Occupancy / Capacity) + β · QueueLength − γ · TrafficLevel + δ · IsSpecialDay + ε · VehicleTypeWeight
 
 Where:
@@ -91,7 +91,7 @@ Where:
 - `β` (beta) = 0.4 → Importance of queue buildup
 - `γ` (gamma) = 1.5 → Penalizes heavy traffic
 - `δ` (delta) = 2.0 → Boosts price on special days
-- `ε` (epsilon) = 1.0 → Based on type of vehicle (e.g., SUV > Car > Bike)
+- `ε` (epsilon) = 1.0 → Based on type of vehicle (e.g., Truck > Car > Bike > Cycle)
 
 ### 💰 Price Formula
 price = base_price × (1 + λ × NormalizedDemand)
