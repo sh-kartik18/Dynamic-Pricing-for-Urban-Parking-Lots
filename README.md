@@ -1,4 +1,12 @@
 # 🚗 Dynamic Parking Pricing System (Real-time with Pathway & Bokeh)
+![Python](https://img.shields.io/badge/Python-3.13.5-blue?logo=python)
+![Pandas](https://img.shields.io/badge/Pandas-Data%20Processing-purple?logo=pandas)
+![NumPy](https://img.shields.io/badge/NumPy-Numerical%20Computing-orange?logo=numpy)
+![Pathway](https://img.shields.io/badge/Stream%20Engine-Pathway-brightgreen)
+![Bokeh](https://img.shields.io/badge/Visualization-Bokeh-brown?logo=python)
+![Panel](https://img.shields.io/badge/Dashboard-Panel-lightblue)
+![Colab](https://img.shields.io/badge/Notebook-Google%20Colab-grey?logo=googlecolab)
+
 This project implements a real-time dynamic parking pricing model that adjusts parking fees based on factors like demand, traffic, queue length, special events, and vehicle type. The goal is to optimize resource usage, reduce congestion, and improve user experience by simulating real-world parking dynamics using streaming data.
 ## 📌 Key Features
 
